@@ -11,7 +11,18 @@ import {
   UserGroupIcon,
   Presentation01Icon,
   QuillWrite01Icon,
+  FlowSquareIcon,
+  ChartIncreaseIcon,
+  Mouse01Icon,
+  AiPhone01Icon,
+  Home01Icon,
+  NewOfficeIcon,
+  CodeIcon,
+  AiNetworkIcon,
+  AiSecurity01Icon
 } from 'hugeicons-vue'
+
+const activeTab = ref('services')
 
 const services = ref([
   { id: 1,  title: 'IT Consultancy',                                              icon: AiLaptopIcon,       desc: 'Strategic technology advice to modernise your business.' },
@@ -24,6 +35,19 @@ const services = ref([
   { id: 8,  title: 'Team Building',                                               icon: UserGroupIcon,      desc: 'Workshops and activities that forge high-performing teams.' },
   { id: 9,  title: 'Training',                                                    icon: Presentation01Icon, desc: 'Up-skill your workforce with hands-on training programmes.' },
   { id: 10, title: 'Content Creation & Management',                               icon: QuillWrite01Icon,   desc: 'Compelling content strategies that grow your brand.' },
+  { id: 11, title: 'Process Analysis & Optimisation',                                icon: FlowSquareIcon,     desc: 'Mapping and streamlining your workflows to eliminate inefficiencies.' },
+  { id: 12, title: 'Business Transformation & Change Management',                   icon: ChartIncreaseIcon,  desc: 'Guiding your organisation through structural and operational change.' },
+])
+
+const products = ref([
+  { id: 1, title: 'High end and Gaming computers', icon: AiLaptopIcon, desc: 'Top-tier performance for gaming and professional workloads.' },
+  { id: 2, title: 'Computer Accessories', icon: Mouse01Icon, desc: 'Essential peripherals to enhance your computing experience.' },
+  { id: 3, title: 'Smart devices', icon: AiPhone01Icon, desc: 'Connected devices to keep you productive and in touch.' },
+  { id: 4, title: 'Smart home devices', icon: Home01Icon, desc: 'Automate and secure your home with intelligent technology.' },
+  { id: 5, title: 'Smart office devices', icon: NewOfficeIcon, desc: 'Modernise your workspace for maximum efficiency.' },
+  { id: 6, title: 'Computer Software', icon: CodeIcon, desc: 'Essential software solutions for business and personal use.' },
+  { id: 7, title: 'Networking equipment', icon: AiNetworkIcon, desc: 'Reliable networking gear to keep you connected.' },
+  { id: 8, title: 'Security and surveillance', icon: AiSecurity01Icon, desc: 'Advanced systems to protect your premises and assets.' },
 ])
 </script>
 
@@ -31,12 +55,29 @@ const services = ref([
   <section class="services" id="services">
     <div class="container">
       <div class="section-header">
-        <h2 class="section-title">Our Services</h2>
+        <h2 class="section-title">Products & Services</h2>
         <div class="divider"></div>
         <p class="section-subtitle">Comprehensive solutions tailored to your business and personal growth needs.</p>
       </div>
+
+      <div class="stepper-container">
+        <button 
+          class="stepper-btn" 
+          :class="{ active: activeTab === 'services' }" 
+          @click="activeTab = 'services'"
+        >
+          Services
+        </button>
+        <button 
+          class="stepper-btn" 
+          :class="{ active: activeTab === 'products' }" 
+          @click="activeTab = 'products'"
+        >
+          Products
+        </button>
+      </div>
       
-      <div class="services-grid">
+      <div v-if="activeTab === 'services'" class="services-grid">
         <div v-for="service in services" :key="service.id" class="service-card">
           <div class="card-inner">
             <div class="service-icon-wrap">
@@ -44,6 +85,19 @@ const services = ref([
             </div>
             <h3 class="service-title">{{ service.title }}</h3>
             <p class="service-desc">{{ service.desc }}</p>
+            <div class="card-arrow">→</div>
+          </div>
+        </div>
+      </div>
+
+      <div v-if="activeTab === 'products'" class="services-grid">
+        <div v-for="product in products" :key="product.id" class="service-card">
+          <div class="card-inner">
+            <div class="service-icon-wrap">
+              <component :is="product.icon" class="service-icon" size="36" />
+            </div>
+            <h3 class="service-title">{{ product.title }}</h3>
+            <p class="service-desc">{{ product.desc }}</p>
             <div class="card-arrow">→</div>
           </div>
         </div>
@@ -85,6 +139,38 @@ const services = ref([
   margin: 0 auto;
 }
 
+/* Stepper */
+.stepper-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.stepper-btn {
+  background: white;
+  border: 2px solid transparent;
+  padding: 0.75rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #666;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.stepper-btn:hover {
+  color: var(--primary-blue);
+  transform: translateY(-2px);
+}
+
+.stepper-btn.active {
+  background: var(--primary-blue);
+  color: white;
+  box-shadow: 0 8px 20px rgba(91, 155, 213, 0.3);
+}
+
 /* Grid */
 .services-grid {
   display: grid;
@@ -118,10 +204,6 @@ const services = ref([
   border-top: 3px solid transparent;
   transition: border-color 0.3s ease;
   border-radius: 16px;
-}
-
-.service-card:hover .card-inner {
-  border-top-color: var(--primary-blue);
 }
 
 /* Icon bubble */

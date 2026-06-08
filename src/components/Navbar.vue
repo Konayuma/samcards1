@@ -12,8 +12,8 @@ import logo from '../samcardsflat.png'
       </div>
       <nav class="nav-links">
         <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#contact">Contact</a>
+        <a href="#services">Products & Services</a>
+        <a href="#contact">Contact Us</a>
       </nav>
     </div>
   </header>
@@ -21,8 +21,8 @@ import logo from '../samcardsflat.png'
 
 <style scoped>
 .navbar {
-  background-color: white;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  background-color: #ffffff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -32,7 +32,7 @@ import logo from '../samcardsflat.png'
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 92px;
+  height: 64px;
 }
 
 .logo a {
@@ -41,7 +41,7 @@ import logo from '../samcardsflat.png'
 }
 
 .logo-img {
-  height: 72px;
+  height: 48px;
   width: auto;
   display: block;
 }
@@ -61,13 +61,15 @@ import logo from '../samcardsflat.png'
 }
 
 .nav-links a {
-  font-weight: 600;
-  color: var(--dark-text);
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: #94a3b8;
   transition: color 0.3s;
 }
 
 .nav-links a:hover {
-  color: var(--primary-blue);
+  color: #333333;
 }
 
 @media (max-width: 768px) {
